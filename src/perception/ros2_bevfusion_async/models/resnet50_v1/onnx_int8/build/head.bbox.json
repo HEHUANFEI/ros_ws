@@ -1,0 +1,3189 @@
+{"Layers": [{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to Conv_0",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "middle",
+    "Location": "Device",
+    "Dimensions": [1,512,180,180],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_0",
+    "Location": "Device",
+    "Dimensions": [1,512,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003ea",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Conv_0",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_0",
+    "Location": "Device",
+    "Dimensions": [1,512,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "504",
+    "Location": "Device",
+    "Dimensions": [1,128,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Half", "Count": 589824},
+  "Bias": {"Type": "Half", "Count": 128},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize256x128x64_stage3_warpsize4x2x1_g1_tensor16x8x16",
+  "TacticValue": "0x5a55274960724ba8",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_0]"
+},{
+  "Name": "Conv_4 + Relu_5",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "504",
+    "Location": "Device",
+    "Dimensions": [1,128,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "509",
+    "Location": "Device",
+    "Dimensions": [1,128,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Half", "Count": 147456},
+  "Bias": {"Type": "Half", "Count": 128},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x32_stage4_warpsize2x2x1_g1_tensor16x8x16_t1r3s3",
+  "TacticValue": "0x60c3421152ef8e10",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_4]\u001e[ONNX Layer: Relu_5]"
+},{
+  "Name": "Conv_6 + PWN(Sigmoid_7)",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "509",
+    "Location": "Device",
+    "Dimensions": [1,128,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Output Tensor 0 to Conv_6 + PWN(Sigmoid_7)",
+    "Location": "Device",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 10,
+  "Groups": 1,
+  "Weights": {"Type": "Half", "Count": 11520},
+  "Bias": {"Type": "Half", "Count": 10},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "GENERIC",
+  "ParameterSubType": "PointWiseExpression",
+  "NbPointWiseExpressionInputArgs": 1,
+  "PointWiseExpressionInputArgs": ["arg0"],
+  "NbPointWiseExpressionOutputVars": 1,
+  "PointWiseExpressionOutputVars": ["var3"],
+  "NbPointWiseExpressionParams": 0,
+  "PointWiseExpressionParams": [],
+  "NbPointWiseExpressionLiterals": 5,
+  "PointWiseExpressionLiterals": ["0.000000e+00f", "1.000000e+00f", "0.000000e+00f", "0.000000e+00f", "5.000000e-01f"],
+  "NbPointWiseExpressionOperations": 4,
+  "PointWiseExpressionOperations": ["auto const var0 = pwgen::iMul(literal4, arg0);", "auto const var1 = pwgen::iTanh(var0);", "auto const var2 = pwgen::iMul(var1, literal4);", "auto const var3 = pwgen::iPlus(var2, literal4);"],
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize256x64x32_stage3_warpsize4x1x1_g1_tensor16x8x16_linkable",
+  "TacticValue": "0xad01c782980ed344",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_6]\u001e[ONNX Layer: Sigmoid_7]"
+},{
+  "Name": "Reformatting CopyNode for Output Tensor 0 to Conv_6 + PWN(Sigmoid_7)",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "Reformatted Output Tensor 0 to Conv_6 + PWN(Sigmoid_7)",
+    "Location": "Device",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "511",
+    "Location": "Device",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "MaxPool_9",
+  "LayerType": "CaskPooling",
+  "Inputs": [
+  {
+    "Name": "511",
+    "Location": "Device",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "513",
+    "Location": "Device",
+    "Dimensions": [1,10,178,178],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Pooling",
+  "PoolingType": "MAX",
+  "WindowSize": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "BlendFactor": 0,
+  "AverageCountExcludesPadding": 1,
+  "TacticName": "sm50_xmma_pooling_tiled_FP32NCHW_kMAX_custom_tP4_tQ32_tRS3_tUV1",
+  "TacticValue": "0x6193a97a80c05353",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: MaxPool_9]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "513",
+    "Location": "Device",
+    "Dimensions": [1,10,178,178],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+    "Location": "Device",
+    "Dimensions": [1,10,178,178],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 1 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "511",
+    "Location": "Device",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 1 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+    "Location": "Device",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "dummy_shape_call__mye25906_0_myl8_0",
+  "LayerType": "shape_call",
+  "Inputs": [],
+  "Outputs": [],
+  "TacticName": "",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "__myl_Mov_myl8_1",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "512_constantHalf",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "651'.1",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_Mov_0x822f1f746de1c088369e1b499acba23f",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: ScatterND_49]"
+},{
+  "Name": "__myl_RepResRepResRepResRepResConCas_myl8_2",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__mye25789_dconst_concat",
+    "Dimensions": [1,10,1,1],
+    "Format/Datatype": "Int64"
+  },
+  {
+    "Name": "__mye25779_dconst_concat",
+    "Dimensions": [1,1,1,178],
+    "Format/Datatype": "Int64"
+  },
+  {
+    "Name": "__mye25784_dconst_concat",
+    "Dimensions": [1,1,178,1],
+    "Format/Datatype": "Int64"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_4",
+    "Dimensions": [1,10,178,178,4],
+    "Format/Datatype": "Int32"
+  }],
+  "TacticName": "__myl_RepResRepResRepResRepResConCas_0x50ac7c04ccea9c008f87a52a816f595a",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Expand_36]\u001f[ONNX Layer: Unsqueeze_38]\u001f[ONNX Layer: Expand_44]\u001f[ONNX Layer: Unsqueeze_46]\u001f[ONNX Layer: Concat_47]\u001f[ONNX Layer: Unsqueeze_22]\u001f[ONNX Layer: Expand_20]\u001f[ONNX Layer: Unsqueeze_30]\u001f[ONNX Layer: Expand_28]"
+},{
+  "Name": "__myl_Sca_myl8_3",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "651'.1",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_4",
+    "Dimensions": [1,10,178,178,4],
+    "Format/Datatype": "Int32"
+  },
+  {
+    "Name": "Reformatted Input Tensor 0 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+    "Dimensions": [1,10,178,178],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "651'.1",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_Sca_0xef8252f6d24cad041d618a3152dc5bce",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: ScatterND_49]"
+},{
+  "Name": "__myl_Sli_myl8_4",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 1 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_6",
+    "Dimensions": [1,1,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_Sli_0xffde635fe2b1c6d58477b82d9a3391f3",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Gather_51]"
+},{
+  "Name": "__myl_Sca_myl8_5",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "651'.1",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye25842_dconst",
+    "Dimensions": [1,1,2],
+    "Format/Datatype": "Int32"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_6",
+    "Dimensions": [1,1,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "651'.1",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_Sca_0xe752dfc20b9fef64063d529934142e81",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: ScatterND_82]"
+},{
+  "Name": "__myl_Sli_myl8_6",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 1 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_8",
+    "Dimensions": [1,1,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_Sli_0x838b390931666b9e7f936649775b8f68",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Gather_84]"
+},{
+  "Name": "__myl_Sca_myl8_7",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "651'.1",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye25837_dconst",
+    "Dimensions": [1,1,2],
+    "Format/Datatype": "Int32"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_8",
+    "Dimensions": [1,1,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "651'.1",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_Sca_0x27dd742a2cdc59e25aab6b2e004eab59",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: ScatterND_115]"
+},{
+  "Name": "__myl_EqlCasMul_myl8_8",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 1 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "Reformatted Input Tensor 1 to {ForeignNode[670 + ONNXTRT_Broadcast_219...ONNXTRT_unsqueezeTensor]}",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "651'.1",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "656",
+    "Dimensions": [1,10,180,180],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_EqlCasMul_0xbd104f7deaa478358b2092c8642ed276",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Equal_116]\u001f[ONNX Layer: Cast_117]\u001f[ONNX Layer: Mul_118]"
+},{
+  "Name": "__myl_ResTop_myl8_9",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "656",
+    "Dimensions": [1,10,32400],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "662'.1",
+    "Dimensions": [1,200],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_12",
+    "Dimensions": [1,200],
+    "Format/Datatype": "Int32"
+  }],
+  "TacticName": "__myl_ResTop_0x69f9902874da5b01a9051907b9afb7f9",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Reshape_122]\u001f[ONNX Layer: TopK_123]"
+},{
+  "Name": "__myl_CasDivMulSubResCasRepResCasGatTraGatResTraRes_myl8_10",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "507_constantHalf",
+    "Dimensions": [1,32400,2],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "classes_eye_constantHalf",
+    "Dimensions": [10,10],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_12",
+    "Dimensions": [1,200],
+    "Format/Datatype": "Int32"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 328) [Shuffle]_output",
+    "Dimensions": [1,2,200],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "715",
+    "Dimensions": [1,200,2],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 301) [Shuffle]_output",
+    "Dimensions": [1,10,200,1],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "700",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "672",
+    "Dimensions": [1,200],
+    "Format/Datatype": "Int64"
+  }],
+  "TacticName": "__myl_CasDivMulSubResCasRepResCasGatTraGatResTraRes_0xef3cf7c24e87011bb64e273a55192005",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Div_129]\u001f[ONNX Layer: Sub_132]\u001f[ONNX Layer: Mul_131]\u001f[ONNX Layer: Gather_144]\u001f[ONNX Layer: Unsqueeze_146]\u001e[ONNX Layer: Transpose_147]\u001f[ONNX Layer: Reshape_143]\u001f[ONNX Layer: GatherElements_161]\u001f[ONNX Layer: Transpose_162]\u001f[ONNX Layer: Unsqueeze_151]\u001e[ONNX Layer: Transpose_152]"
+},{
+  "Name": "722 + ONNXTRT_unsqueezeTensor_266",
+  "LayerType": "Constant",
+  "Inputs": [],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 337) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,32400,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Constant",
+  "weights": {"Type": "Float", "Count": 64800},
+  "dimensions": [1,2,32400,1],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to shuffle_between_ONNXTRT_unsqueezeTensor_266_output_and_Conv_168 + BatchNormalization_169 + Relu_170",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 337) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,32400,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_between_ONNXTRT_unsqueezeTensor_266_output_and_Conv_168 + BatchNormalization_169 + Relu_170",
+    "Location": "Device",
+    "Dimensions": [1,2,32400,1],
+    "Format/Datatype": "Channel major FP16 format where channel % 4 == 0"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_266_output_and_Conv_168 + BatchNormalization_169 + Relu_170",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_between_ONNXTRT_unsqueezeTensor_266_output_and_Conv_168 + BatchNormalization_169 + Relu_170",
+    "Location": "Device",
+    "Dimensions": [1,2,32400,1],
+    "Format/Datatype": "Channel major FP16 format where channel % 4 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_266_output_and_Conv_168 + BatchNormalization_169 + Relu_170_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,32400],
+    "Format/Datatype": "Channel major FP16 format where channel % 4 == 0"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_168]\u001e[ONNX Layer: BatchNormalization_169]\u001e[ONNX Layer: Relu_170]"
+},{
+  "Name": "Conv_168 + BatchNormalization_169 + Relu_170",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_266_output_and_Conv_168 + BatchNormalization_169 + Relu_170_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,32400],
+    "Format/Datatype": "Channel major FP16 format where channel % 4 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_168 + BatchNormalization_169 + Relu_170_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,32400],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Half", "Count": 256},
+  "Bias": {"Type": "Half", "Count": 128},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x32x16_stage1_warpsize4x1x1_g1_tensor16x8x16_aligna8_alignc8",
+  "TacticValue": "0xfb0beb2dd64ff6e8",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_168]\u001e[ONNX Layer: BatchNormalization_169]\u001e[ONNX Layer: Relu_170]"
+},{
+  "Name": "shuffle_after_Relu_170_out_tensor",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_168 + BatchNormalization_169 + Relu_170_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,32400],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Relu_170_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,128,32400,1],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_168]\u001e[ONNX Layer: BatchNormalization_169]\u001e[ONNX Layer: Relu_170]"
+},{
+  "Name": "shuffle_between_Relu_170_out_tensor_and_Conv_171",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Relu_170_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,128,32400,1],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_Relu_170_out_tensor_and_Conv_171_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,32400],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_171]"
+},{
+  "Name": "Conv_171",
+  "LayerType": "CaskGemmConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_Relu_170_out_tensor_and_Conv_171_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,32400],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_171_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,32400],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Half", "Count": 16384},
+  "Bias": {"Type": "Half", "Count": 128},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize128x128x32_stage4_warpsize2x2x1_tensor16x8x16",
+  "TacticValue": "0x0000000000020794",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_171]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to shuffle_after_Conv_171_output",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "Conv_171_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,32400],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_171_output",
+    "Location": "Device",
+    "Dimensions": [1,128,1,32400],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_after_Conv_171_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_171_output",
+    "Location": "Device",
+    "Dimensions": [1,128,1,32400],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 345) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,32400,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_171]"
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_output_and_Conv_148",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 301) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,10,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_output_and_Conv_148_out_region",
+    "Location": "Device",
+    "Dimensions": [1,10,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_148]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to Conv_148",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_output_and_Conv_148_out_region",
+    "Location": "Device",
+    "Dimensions": [1,10,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_148",
+    "Location": "Device",
+    "Dimensions": [1,10,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Conv_148",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_148",
+    "Location": "Device",
+    "Dimensions": [1,10,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_148_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Half", "Count": 1280},
+  "Bias": {"Type": "Half", "Count": 128},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x32x16_stage1_warpsize4x1x1_g1_tensor16x8x16_aligna8_alignc8",
+  "TacticValue": "0xfb0beb2dd64ff6e8",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_148]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to shuffle_after_Conv_148_output",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "Conv_148_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_148_output",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_after_Conv_148_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_148_output",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 302) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_148]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to shuffle_between_ONNXTRT_unsqueezeTensor_258_output_and_Conv_163 + Relu_164",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 328) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_between_ONNXTRT_unsqueezeTensor_258_output_and_Conv_163 + Relu_164",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_258_output_and_Conv_163 + Relu_164",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_between_ONNXTRT_unsqueezeTensor_258_output_and_Conv_163 + Relu_164",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_258_output_and_Conv_163 + Relu_164_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_163]\u001e[ONNX Layer: Relu_164]"
+},{
+  "Name": "Conv_163 + Relu_164",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_258_output_and_Conv_163 + Relu_164_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_163 + Relu_164_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Half", "Count": 256},
+  "Bias": {"Type": "Half", "Count": 128},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x16x32_stage1_warpsize4x1x1_g1_tensor16x8x16_alignc8",
+  "TacticValue": "0xfbf5ea2d8a6293cd",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_163]\u001e[ONNX Layer: Relu_164]"
+},{
+  "Name": "shuffle_after_Relu_164_out_tensor",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_163 + Relu_164_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Relu_164_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_163]\u001e[ONNX Layer: Relu_164]"
+},{
+  "Name": "shuffle_between_Relu_164_out_tensor_and_Conv_165",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Relu_164_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_Relu_164_out_tensor_and_Conv_165_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_165]"
+},{
+  "Name": "Conv_165",
+  "LayerType": "CaskGemmConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_Relu_164_out_tensor_and_Conv_165_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_165_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Half", "Count": 16384},
+  "Bias": {"Type": "Half", "Count": 128},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize64x32x64_stage5_warpsize2x2x1_tensor16x8x16",
+  "TacticValue": "0x0000000000020535",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_165]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to shuffle_after_Conv_165_output",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "Conv_165_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_165_output",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_after_Conv_165_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_165_output",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 333) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_165]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to {ForeignNode[Reshape_2...ONNXTRT_unsqueezeTensor_664]}",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "504",
+    "Location": "Device",
+    "Dimensions": [1,128,180,180],
+    "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to {ForeignNode[Reshape_2...ONNXTRT_unsqueezeTensor_664]}",
+    "Location": "Device",
+    "Dimensions": [1,128,180,180],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "dummy_shape_call__mye28873_0_myl32_0",
+  "LayerType": "shape_call",
+  "Inputs": [],
+  "Outputs": [],
+  "TacticName": "",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "entry^bb^signal^1_myl32_1",
+  "LayerType": "signal",
+  "Inputs": [],
+  "Outputs": [],
+  "TacticName": "",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "entry^bb^wait^1_myl32_2",
+  "LayerType": "wait",
+  "Inputs": [],
+  "Outputs": [],
+  "TacticName": "",
+  "StreamId": 1,
+  "Metadata": ""
+},{
+  "Name": "__myl_TraTraAdd_myl32_3",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to {ForeignNode[Reshape_2...ONNXTRT_unsqueezeTensor_664]}",
+    "Dimensions": [1,128,32400],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 345) [Convolution]_output",
+    "Dimensions": [1,128,32400],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "829'.1",
+    "Dimensions": [32400,1,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_TraTraAdd_0xa2e3a7dbf34d34b8147354814a53d629",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Transpose_172]\u001f[ONNX Layer: Add_266]\u001f[ONNX Layer: Transpose_174]"
+},{
+  "Name": "__mye28059+__mye28047_myl32_4",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "829'.1",
+    "Dimensions": [32400,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28539_dconst",
+    "Dimensions": [2,128,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28061__mye28059_alpha",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28062__mye28059_beta",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28544_dconst",
+    "Dimensions": [2,1,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__mye28496",
+    "Dimensions": [2,32400,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize256x128x32_stage3_warpsize4x2x1_tensor16x8x16",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: MatMul_300]\u001f[ONNX Layer: Add_301]"
+},{
+  "Name": "__myl_CasRepGatRepGatAddTraTraAdd_myl32_5",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to {ForeignNode[Reshape_2...ONNXTRT_unsqueezeTensor_664]}",
+    "Dimensions": [1,128,32400],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 302) [Convolution]_output",
+    "Dimensions": [1,128,200],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 333) [Convolution]_output",
+    "Dimensions": [1,128,200],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "656",
+    "Dimensions": [1,10,32400],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "672",
+    "Dimensions": [1,1,200],
+    "Format/Datatype": "Int64"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_12",
+    "Dimensions": [200,1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "730'.1",
+    "Dimensions": [200,1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_11",
+    "Dimensions": [200,1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "1024",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_CasRepGatRepGatAddTraTraAdd_0x22dcc38daf6614786b953f092fb4c1db",
+  "StreamId": 1,
+  "Metadata": "[ONNX Layer: GatherElements_421]\u001f[ONNX Layer: Transpose_166]\u001f[ONNX Layer: Add_175]\u001f[ONNX Layer: Add_149]\u001f[ONNX Layer: Transpose_173]\u001f[ONNX Layer: GatherElements_141]"
+},{
+  "Name": "__mye28137+__mye28125+__mye28113_myl32_6",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "730'.1",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28549_dconst",
+    "Dimensions": [3,128,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28139__mye28137_alpha",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28140__mye28137_beta",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28554_dconst",
+    "Dimensions": [3,1,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__mye28471",
+    "Dimensions": [3,200,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize64x128x32_stage5_warpsize2x2x1_tensor16x8x16",
+  "StreamId": 1,
+  "Metadata": "[ONNX Layer: MatMul_189]\u001f[ONNX Layer: Add_190]"
+},{
+  "Name": "_gemm_mha_v2_myl32_7",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__mye28471",
+    "Dimensions": [8,200,16],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28471",
+    "Dimensions": [8,16,200],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28471",
+    "Dimensions": [8,200,16],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_14",
+    "Dimensions": [8,200,16],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "_gemm_mha_v2_0xb5d2229bc0a31794fd26dcd097d8ce45",
+  "StreamId": 1,
+  "Metadata": "[ONNX Layer: MatMul_241]\u001f[ONNX Layer: Softmax_240]\u001f[ONNX Layer: MatMul_239]\u001f[ONNX Layer: Mul_209]"
+},{
+  "Name": "__myl_Tra_myl32_8",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__myln_k_arg__bb1_14",
+    "Dimensions": [8,200,16],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "Transpose_242 _ Reshape_250_first_transpose_output.1",
+    "Dimensions": [200,8,16],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_Tra_0x8fa47ab942866004b1c2d4bc8af6caf4",
+  "StreamId": 1,
+  "Metadata": "[ONNX Layer: Transpose_242]\u001e[ONNX Layer: Reshape_250]"
+},{
+  "Name": "MatMul_251_myl32_9",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "Transpose_242 _ Reshape_250_first_transpose_output.1",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27921_dconst",
+    "Dimensions": [128,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27788MatMul_251_alpha",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye27789MatMul_251_beta",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28410_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_16",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize64x32x64_stage5_warpsize2x2x1_tensor16x8x16",
+  "StreamId": 1,
+  "Metadata": "[ONNX Layer: MatMul_251]\u001f[ONNX Layer: Add_252]"
+},{
+  "Name": "__myl_ResAddMeaSubMulMeaAddSqrDivMulMulAddResAdd_myl32_10",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__mye28384_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28378_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_11",
+    "Dimensions": [200,1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_16",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_12",
+    "Dimensions": [200,1,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_18",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_17",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_ResAddMeaSubMulMeaAddSqrDivMulMulAddResAdd_0x60b965a302dc52850a5d0e67d7a3a444",
+  "StreamId": 1,
+  "Metadata": "[ONNX Layer: Add_253]\u001f[ONNX Layer: ReduceMean_258]\u001f[ONNX Layer: Sub_255]\u001f[ONNX Layer: Pow_257]\u001f[ONNX Layer: ReduceMean_254]\u001f[ONNX Layer: Div_262]\u001f[ONNX Layer: Add_265]\u001f[ONNX Layer: Add_264]\u001f[ONNX Layer: Mul_263]\u001f[ONNX Layer: Sqrt_261]\u001f[ONNX Layer: Add_260]"
+},{
+  "Name": "MatMul_289_myl32_11",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "__myln_k_arg__bb1_17",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28623dconst",
+    "Dimensions": [128,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27809MatMul_289_alpha",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye27810MatMul_289_beta",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28363_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "865'.1",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize64x32x64_stage5_warpsize2x2x1_tensor16x8x16",
+  "StreamId": 1,
+  "Metadata": "[ONNX Layer: MatMul_289]\u001f[ONNX Layer: Add_290]"
+},{
+  "Name": "__mye28735_myl32_12",
+  "LayerType": "signal",
+  "Inputs": [],
+  "Outputs": [],
+  "TacticName": "",
+  "StreamId": 1,
+  "Metadata": ""
+},{
+  "Name": "__mye28737_myl32_13",
+  "LayerType": "wait",
+  "Inputs": [],
+  "Outputs": [],
+  "TacticName": "",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "_gemm_mha_v2_myl32_14",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "865'.1",
+    "Dimensions": [8,200,16],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28496",
+    "Dimensions": [8,16,32400],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28496",
+    "Dimensions": [8,32400,16],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_20",
+    "Dimensions": [8,200,16],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "_gemm_mha_v2_0xab6a9b17092922e8cae23690d66fc1b8",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: MatMul_349]\u001f[ONNX Layer: Softmax_348]\u001f[ONNX Layer: MatMul_347]\u001f[ONNX Layer: Mul_317]"
+},{
+  "Name": "__myl_Tra_myl32_15",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__myln_k_arg__bb1_20",
+    "Dimensions": [8,200,16],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "Transpose_350 _ Reshape_358_first_transpose_output.1",
+    "Dimensions": [200,8,16],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_Tra_0x8fa47ab942866004b1c2d4bc8af6caf4",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Transpose_350]\u001e[ONNX Layer: Reshape_358]"
+},{
+  "Name": "MatMul_359_myl32_16",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "Transpose_350 _ Reshape_358_first_transpose_output.1",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27938_dconst",
+    "Dimensions": [128,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27852MatMul_359_alpha",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye27853MatMul_359_beta",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28348_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_22",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize64x32x64_stage5_warpsize2x2x1_tensor16x8x16",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: MatMul_359]\u001f[ONNX Layer: Add_360]"
+},{
+  "Name": "__myl_AddMeaSubMulMeaAddSqrDivMulMulAdd_myl32_17",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__mye28326_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28316_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_18",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_22",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "970'.1_23",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_AddMeaSubMulMeaAddSqrDivMulMulAdd_0xd306e85ccf19b1918a1613bccdbb700b",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Add_361]\u001f[ONNX Layer: ReduceMean_362]\u001f[ONNX Layer: Pow_365]\u001f[ONNX Layer: Sub_363]\u001f[ONNX Layer: ReduceMean_366]\u001f[ONNX Layer: Div_370]\u001f[ONNX Layer: Add_372]\u001f[ONNX Layer: Mul_371]\u001f[ONNX Layer: Sqrt_369]\u001f[ONNX Layer: Add_368]"
+},{
+  "Name": "MatMul_373_myl32_18",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "970'.1_23",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27951_dconst",
+    "Dimensions": [128,256],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27873MatMul_373_alpha",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye27874MatMul_373_beta",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28310_reshape",
+    "Dimensions": [1,256],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "973'.1_24",
+    "Dimensions": [200,256],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x16",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: MatMul_373]\u001f[ONNX Layer: Relu_375]\u001f[ONNX Layer: Add_374]"
+},{
+  "Name": "MatMul_376_myl32_19",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "973'.1_24",
+    "Dimensions": [200,256],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27956_dconst",
+    "Dimensions": [256,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye27894MatMul_376_alpha",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye27895MatMul_376_beta",
+    "Dimensions": [1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye28299_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_25",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize64x32x64_stage5_warpsize2x2x1_tensor16x8x16",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: MatMul_376]\u001f[ONNX Layer: Add_377]"
+},{
+  "Name": "__myl_AddMeaSubMulMea_myl32_20",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "970'.1_23",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_25",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_27",
+    "Dimensions": [200,1],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_26",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_AddMeaSubMulMea_0xe2c4676e49432ac119f9bbc2bd87f5a2",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Add_378]\u001f[ONNX Layer: ReduceMean_379]\u001f[ONNX Layer: Pow_382]\u001f[ONNX Layer: Sub_380]\u001f[ONNX Layer: ReduceMean_383]"
+},{
+  "Name": "__myl_AddSqrDivMulMulAddResTraResMovMovMovMovMov_myl32_21",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__mye28267_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__mye28277_reshape",
+    "Dimensions": [1,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_26",
+    "Dimensions": [200,128],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_27",
+    "Dimensions": [200,1],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 818) [Shuffle]_output",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 825) [Shuffle]_output",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 832) [Shuffle]_output",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 839) [Shuffle]_output",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 846) [Shuffle]_output",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "(Unnamed Layer* 853) [Shuffle]_output",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_AddSqrDivMulMulAddResTraResMovMovMovMovMov_0x437eb89ffa1d948152d929dd71d13b2a",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Add_385]\u001f[ONNX Layer: Sqrt_386]\u001f[ONNX Layer: Div_387]\u001f[ONNX Layer: Mul_388]\u001f[ONNX Layer: Add_389]\u001f[ONNX Layer: Transpose_390]"
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_664_output_and_Conv_391 + Relu_392",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 818) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_664_output_and_Conv_391 + Relu_392_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_391]\u001e[ONNX Layer: Relu_392]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to Conv_391 + Relu_392",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_664_output_and_Conv_391 + Relu_392_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_391 + Relu_392",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Conv_391 + Relu_392",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_391 + Relu_392",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_391 + Relu_392_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 8192},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f32f32_tf32f32_f32_nchwkrsc_nchw_tilesize64x64x64_stage4_warpsize2x2x1_g1_tensor16x8x8_simple_t1r1s1_aligna4_alignc4",
+  "TacticValue": "0x5fc609cfe7c5b7d9",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_391]\u001e[ONNX Layer: Relu_392]"
+},{
+  "Name": "shuffle_after_Relu_392_out_tensor",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_391 + Relu_392_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Relu_392_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_391]\u001e[ONNX Layer: Relu_392]"
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_672_output_and_Conv_394 + Relu_395",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 825) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_672_output_and_Conv_394 + Relu_395_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_394]\u001e[ONNX Layer: Relu_395]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to Conv_394 + Relu_395",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_672_output_and_Conv_394 + Relu_395_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_394 + Relu_395",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Conv_394 + Relu_395",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_394 + Relu_395",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_394 + Relu_395_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 8192},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f32f32_tf32f32_f32_nchwkrsc_nchw_tilesize64x64x64_stage4_warpsize2x2x1_g1_tensor16x8x8_simple_t1r1s1_aligna4_alignc4",
+  "TacticValue": "0x5fc609cfe7c5b7d9",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_394]\u001e[ONNX Layer: Relu_395]"
+},{
+  "Name": "shuffle_after_Relu_395_out_tensor",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_394 + Relu_395_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Relu_395_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_394]\u001e[ONNX Layer: Relu_395]"
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_680_output_and_Conv_397 + Relu_398",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 832) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_680_output_and_Conv_397 + Relu_398_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_397]\u001e[ONNX Layer: Relu_398]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to Conv_397 + Relu_398",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_680_output_and_Conv_397 + Relu_398_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_397 + Relu_398",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Conv_397 + Relu_398",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_397 + Relu_398",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_397 + Relu_398_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 8192},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f32f32_tf32f32_f32_nchwkrsc_nchw_tilesize64x64x64_stage4_warpsize2x2x1_g1_tensor16x8x8_simple_t1r1s1_aligna4_alignc4",
+  "TacticValue": "0x5fc609cfe7c5b7d9",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_397]\u001e[ONNX Layer: Relu_398]"
+},{
+  "Name": "shuffle_after_Relu_398_out_tensor",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_397 + Relu_398_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Relu_398_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_397]\u001e[ONNX Layer: Relu_398]"
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_688_output_and_Conv_400 + Relu_401",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 839) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_688_output_and_Conv_400 + Relu_401_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_400]\u001e[ONNX Layer: Relu_401]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to Conv_400 + Relu_401",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_688_output_and_Conv_400 + Relu_401_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_400 + Relu_401",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Conv_400 + Relu_401",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_400 + Relu_401",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_400 + Relu_401_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 8192},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f32f32_tf32f32_f32_nchwkrsc_nchw_tilesize64x64x64_stage4_warpsize2x2x1_g1_tensor16x8x8_simple_t1r1s1_aligna4_alignc4",
+  "TacticValue": "0x5fc609cfe7c5b7d9",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_400]\u001e[ONNX Layer: Relu_401]"
+},{
+  "Name": "shuffle_after_Relu_401_out_tensor",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_400 + Relu_401_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Relu_401_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_400]\u001e[ONNX Layer: Relu_401]"
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_696_output_and_Conv_403 + Relu_404",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 846) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_696_output_and_Conv_403 + Relu_404_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_403]\u001e[ONNX Layer: Relu_404]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to Conv_403 + Relu_404",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_696_output_and_Conv_403 + Relu_404_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_403 + Relu_404",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Conv_403 + Relu_404",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_403 + Relu_404",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_403 + Relu_404_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 8192},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f32f32_tf32f32_f32_nchwkrsc_nchw_tilesize64x64x64_stage4_warpsize2x2x1_g1_tensor16x8x8_simple_t1r1s1_aligna4_alignc4",
+  "TacticValue": "0x5fc609cfe7c5b7d9",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_403]\u001e[ONNX Layer: Relu_404]"
+},{
+  "Name": "shuffle_after_Relu_404_out_tensor",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_403 + Relu_404_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Relu_404_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_403]\u001e[ONNX Layer: Relu_404]"
+},{
+  "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_704_output_and_Conv_406 + Relu_407",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 853) [Shuffle]_output",
+    "Location": "Device",
+    "Dimensions": [1,128,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_704_output_and_Conv_406 + Relu_407_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_406]\u001e[ONNX Layer: Relu_407]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to Conv_406 + Relu_407",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_ONNXTRT_unsqueezeTensor_704_output_and_Conv_406 + Relu_407_out_region",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_406 + Relu_407",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Conv_406 + Relu_407",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to Conv_406 + Relu_407",
+    "Location": "Device",
+    "Dimensions": [1,128,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_406 + Relu_407_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 8192},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f32f32_tf32f32_f32_nchwkrsc_nchw_tilesize64x64x64_stage4_warpsize2x2x1_g1_tensor16x8x8_simple_t1r1s1_aligna4_alignc4",
+  "TacticValue": "0x5fc609cfe7c5b7d9",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_406]\u001e[ONNX Layer: Relu_407]"
+},{
+  "Name": "shuffle_after_Relu_407_out_tensor",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_406 + Relu_407_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Relu_407_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_406]\u001e[ONNX Layer: Relu_407]"
+},{
+  "Name": "shuffle_between_Relu_407_out_tensor_and_Conv_408",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Relu_407_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_Relu_407_out_tensor_and_Conv_408_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_408]"
+},{
+  "Name": "Conv_408",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_Relu_407_out_tensor_and_Conv_408_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_408_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,10,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 10,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 640},
+  "Bias": {"Type": "Float", "Count": 10},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm50_xmma_conv_fprop_fused_conv_act_fp32_NCHW_fp32_NCHW_KCRS_fp32_fp32_fp32_Accfloat_1_1_cC1_dC1_srcVec4_fltVec1_1_TP1_TQ8_C2_R1_S1_U1_V1",
+  "TacticValue": "0x4d77488847fb11ac",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_408]"
+},{
+  "Name": "shuffle_after_Conv_408_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_408_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,10,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 858) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,10,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_408]"
+},{
+  "Name": "ONNXTRT_squeezeTensor_710",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 858) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,10,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "1030",
+    "Location": "Device",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to PWN(PWN(PWN(Sigmoid_428), PWN(Mul_429)), PWN(Mul_430))",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "1030",
+    "Location": "Device",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to PWN(PWN(PWN(Sigmoid_428), PWN(Mul_429)), PWN(Mul_430))",
+    "Location": "Device",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "PWN(PWN(PWN(Sigmoid_428), PWN(Mul_429)), PWN(Mul_430))",
+  "LayerType": "PointWiseV2",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to PWN(PWN(PWN(Sigmoid_428), PWN(Mul_429)), PWN(Mul_430))",
+    "Location": "Device",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  },
+  {
+    "Name": "1024",
+    "Location": "Device",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  },
+  {
+    "Name": "700",
+    "Location": "Device",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "score",
+    "Location": "Device",
+    "Dimensions": [1,10,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "PointWise",
+  "ParameterSubType": "PointWiseExpression",
+  "NbInputArgs": 3,
+  "InputArgs": ["arg0", "arg1", "arg2"],
+  "NbOutputVars": 1,
+  "OutputVars": ["var5"],
+  "NbParams": 0,
+  "Params": [],
+  "NbLiterals": 5,
+  "Literals": ["0.000000e+00f", "1.000000e+00f", "0.000000e+00f", "0.000000e+00f", "5.000000e-01f"],
+  "NbOperations": 6,
+  "Operations": ["auto const var0 = pwgen::iMul(literal4, arg0);", "auto const var1 = pwgen::iTanh(var0);", "auto const var2 = pwgen::iMul(var1, literal4);", "auto const var3 = pwgen::iPlus(var2, literal4);", "auto const var4 = pwgen::iMul(var3, arg1);", "auto const var5 = pwgen::iMul(var4, arg2);"],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Sigmoid_428]\u001e[ONNX Layer: Mul_429]\u001e[ONNX Layer: Mul_430]"
+},{
+  "Name": "shuffle_between_Relu_404_out_tensor_and_Conv_405",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Relu_404_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_Relu_404_out_tensor_and_Conv_405_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_405]"
+},{
+  "Name": "Conv_405",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_Relu_404_out_tensor_and_Conv_405_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_405_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 2,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 128},
+  "Bias": {"Type": "Float", "Count": 2},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm50_xmma_conv_fprop_fused_conv_act_fp32_NCHW_fp32_NCHW_KCRS_fp32_fp32_fp32_Accfloat_1_1_cC1_dC1_srcVec4_fltVec1_1_TP1_TQ8_C2_R1_S1_U1_V1",
+  "TacticValue": "0x4d77488847fb11ac",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_405]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to shuffle_after_Conv_405_output",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "Conv_405_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_405_output",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_after_Conv_405_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_405_output",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 851) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_405]"
+},{
+  "Name": "ONNXTRT_squeezeTensor_702",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 851) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "vel",
+    "Location": "Device",
+    "Dimensions": [1,2,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_between_Relu_401_out_tensor_and_Conv_402",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Relu_401_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_Relu_401_out_tensor_and_Conv_402_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_402]"
+},{
+  "Name": "Conv_402",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_Relu_401_out_tensor_and_Conv_402_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_402_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 2,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 128},
+  "Bias": {"Type": "Float", "Count": 2},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm50_xmma_conv_fprop_fused_conv_act_fp32_NCHW_fp32_NCHW_KCRS_fp32_fp32_fp32_Accfloat_1_1_cC1_dC1_srcVec4_fltVec1_1_TP1_TQ8_C2_R1_S1_U1_V1",
+  "TacticValue": "0x4d77488847fb11ac",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_402]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to shuffle_after_Conv_402_output",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "Conv_402_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_402_output",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_after_Conv_402_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_402_output",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 844) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_402]"
+},{
+  "Name": "ONNXTRT_squeezeTensor_694",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 844) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "rot",
+    "Location": "Device",
+    "Dimensions": [1,2,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_between_Relu_398_out_tensor_and_Conv_399",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Relu_398_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_Relu_398_out_tensor_and_Conv_399_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_399]"
+},{
+  "Name": "Conv_399",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_Relu_398_out_tensor_and_Conv_399_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_399_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,3,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 3,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 192},
+  "Bias": {"Type": "Float", "Count": 3},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm50_xmma_conv_fprop_fused_conv_act_fp32_NCHW_fp32_NCHW_KCRS_fp32_fp32_fp32_Accfloat_1_1_cC1_dC1_srcVec4_fltVec1_1_TP1_TQ8_C2_R1_S1_U1_V1",
+  "TacticValue": "0x4d77488847fb11ac",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_399]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to shuffle_after_Conv_399_output",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "Conv_399_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,3,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_399_output",
+    "Location": "Device",
+    "Dimensions": [1,3,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_after_Conv_399_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to shuffle_after_Conv_399_output",
+    "Location": "Device",
+    "Dimensions": [1,3,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 837) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,3,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_399]"
+},{
+  "Name": "ONNXTRT_squeezeTensor_686",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 837) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,3,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "dim",
+    "Location": "Device",
+    "Dimensions": [1,3,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_between_Relu_395_out_tensor_and_Conv_396",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Relu_395_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_Relu_395_out_tensor_and_Conv_396_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_396]"
+},{
+  "Name": "Conv_396",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_Relu_395_out_tensor_and_Conv_396_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_396_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,1,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 1,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 64},
+  "Bias": {"Type": "Float", "Count": 1},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm50_xmma_conv_fprop_fused_conv_act_fp32_NCHW_fp32_NCHW_KCRS_fp32_fp32_fp32_Accfloat_1_1_cC1_dC1_srcVec4_fltVec1_1_TP1_TQ8_C2_R1_S1_U1_V1",
+  "TacticValue": "0x4d77488847fb11ac",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_396]"
+},{
+  "Name": "shuffle_after_Conv_396_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_396_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,1,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 830) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,1,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_396]"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to ONNXTRT_squeezeTensor_678",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 830) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,1,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to ONNXTRT_squeezeTensor_678",
+    "Location": "Device",
+    "Dimensions": [1,1,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "ONNXTRT_squeezeTensor_678",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to ONNXTRT_squeezeTensor_678",
+    "Location": "Device",
+    "Dimensions": [1,1,200,1],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "height",
+    "Location": "Device",
+    "Dimensions": [1,1,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "shuffle_between_Relu_392_out_tensor_and_Conv_393",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Relu_392_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,64,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "shuffle_between_Relu_392_out_tensor_and_Conv_393_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_393]"
+},{
+  "Name": "Conv_393",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "shuffle_between_Relu_392_out_tensor_and_Conv_393_out_region",
+    "Location": "Device",
+    "Dimensions": [1,64,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Conv_393_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 2,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 128},
+  "Bias": {"Type": "Float", "Count": 2},
+  "HasBias": 1,
+  "HasReLU": 0,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "TacticName": "sm50_xmma_conv_fprop_fused_conv_act_fp32_NCHW_fp32_NCHW_KCRS_fp32_fp32_fp32_Accfloat_1_1_cC1_dC1_srcVec4_fltVec1_1_TP1_TQ8_C2_R1_S1_U1_V1",
+  "TacticValue": "0x4d77488847fb11ac",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_393]"
+},{
+  "Name": "shuffle_after_Conv_393_output",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "Conv_393_new_out_region",
+    "Location": "Device",
+    "Dimensions": [1,2,1,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "(Unnamed Layer* 823) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Conv_393]"
+},{
+  "Name": "ONNXTRT_squeezeTensor_670",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "(Unnamed Layer* 823) [Convolution]_output",
+    "Location": "Device",
+    "Dimensions": [1,2,200,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "990",
+    "Location": "Device",
+    "Dimensions": [1,2,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 1 to {ForeignNode[Transpose_409...Concat_422]}",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "990",
+    "Location": "Device",
+    "Dimensions": [1,2,200],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 1 to {ForeignNode[Transpose_409...Concat_422]}",
+    "Location": "Device",
+    "Dimensions": [1,2,200],
+    "Format/Datatype": "Row major linear FP16 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x00000000000003e8",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "__myl_TraAdd_myl88_0",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 1 to {ForeignNode[Transpose_409...Concat_422]}",
+    "Dimensions": [1,2,200],
+    "Format/Datatype": "Half"
+  },
+  {
+    "Name": "715",
+    "Dimensions": [1,200,2],
+    "Format/Datatype": "Half"
+  }],
+  "Outputs": [
+  {
+    "Name": "reg",
+    "Dimensions": [1,2,200],
+    "Format/Datatype": "Half"
+  }],
+  "TacticName": "__myl_TraAdd_0x829b0e91328c4b984f52e2f650a10611",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: Transpose_409]\u001f[ONNX Layer: Add_410]"
+}],
+"Bindings": ["middle"
+,"score"
+,"rot"
+,"dim"
+,"reg"
+,"height"
+,"vel"
+]}
