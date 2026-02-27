@@ -1,0 +1,139 @@
+[0.102s] Invoking command in '/home1/ros2_ws/src/sensing/build/v4l2_camera': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home1/autoware/install/autoware_carla_interface:/home1/autoware/install/ros2agnocast:/home1/autoware/install/autoware_adapi_visualizers:/opt/ros/humble /usr/bin/cmake /home1/ros2_ws/src/sensing/v4l2_camera -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home1/ros2_ws/src/sensing/install/v4l2_camera
+[0.559s] -- The C compiler identification is GNU 11.4.0
+[0.852s] -- The CXX compiler identification is GNU 11.4.0
+[0.921s] -- Detecting C compiler ABI info
+[1.511s] -- Detecting C compiler ABI info - done
+[1.526s] -- Check for working C compiler: /usr/lib/ccache/gcc - skipped
+[1.527s] -- Detecting C compile features
+[1.529s] -- Detecting C compile features - done
+[1.539s] -- Detecting CXX compiler ABI info
+[2.132s] -- Detecting CXX compiler ABI info - done
+[2.150s] -- Check for working CXX compiler: /usr/lib/ccache/g++ - skipped
+[2.151s] -- Detecting CXX compile features
+[2.152s] -- Detecting CXX compile features - done
+[2.242s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[3.038s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[3.255s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[4.967s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[5.078s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[5.202s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[5.389s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[5.632s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[6.304s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[6.417s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[7.427s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[7.595s] -- Found FastRTPS: /opt/ros/humble/include  
+[7.858s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[8.032s] -- Looking for pthread.h
+[8.601s] -- Looking for pthread.h - found
+[8.602s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[9.157s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[9.160s] -- Found Threads: TRUE  
+[11.219s] -- Found CUDA: /usr/local/cuda (found version "12.6") 
+[11.308s] -- Found OpenCV: /usr/local (found version "4.8.0") 
+[11.309s] -- CUDA Support is enabled in v4l2_camera
+[11.578s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[12.039s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[12.039s] -- Configured cppcheck include dirs: /home1/ros2_ws/src/sensing/v4l2_camera/include;/home1/ros2_ws/src/sensing/v4l2_camera/include/v4l2_camera;$<BUILD_INTERFACE:/home1/ros2_ws/src/sensing/v4l2_camera/include>
+[12.039s] -- Configured cppcheck exclude dirs and/or files: 
+[12.057s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[12.057s] -- Configured cpplint exclude dirs and/or files: 
+[12.070s] -- Added test 'flake8' to check Python code syntax and style conventions
+[12.084s] -- Added test 'lint_cmake' to check CMake code style
+[12.097s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[12.114s] -- Added test 'uncrustify' to check C / C++ code style
+[12.114s] -- Configured uncrustify additional arguments: 
+[12.127s] -- Added test 'xmllint' to check XML markup files
+[12.160s] -- Configuring done
+[12.214s] -- Generating done
+[12.228s] -- Build files have been written to: /home1/ros2_ws/src/sensing/build/v4l2_camera
+[12.262s] Invoked command in '/home1/ros2_ws/src/sensing/build/v4l2_camera' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home1/autoware/install/autoware_carla_interface:/home1/autoware/install/ros2agnocast:/home1/autoware/install/autoware_adapi_visualizers:/opt/ros/humble /usr/bin/cmake /home1/ros2_ws/src/sensing/v4l2_camera -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home1/ros2_ws/src/sensing/install/v4l2_camera
+[12.270s] Invoking command in '/home1/ros2_ws/src/sensing/build/v4l2_camera': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home1/autoware/install/autoware_carla_interface:/home1/autoware/install/ros2agnocast:/home1/autoware/install/autoware_adapi_visualizers:/opt/ros/humble /usr/bin/cmake --build /home1/ros2_ws/src/sensing/build/v4l2_camera -- -j12 -l12
+[12.640s] [ 12%] [34m[1mBuilding NVCC (Device) object CMakeFiles/v4l2_camera.dir/src/v4l2_camera_generated_undistort_kernel.cu.o[0m
+[17.743s] [ 37%] [32mBuilding CXX object CMakeFiles/v4l2_camera.dir/src/v4l2_camera_device.cpp.o[0m
+[17.744s] [ 37%] [32mBuilding CXX object CMakeFiles/v4l2_camera.dir/src/v4l2_camera.cpp.o[0m
+[37.548s] [ 50%] [32m[1mLinking CXX shared library libv4l2_camera.so[0m
+[39.266s] [ 50%] Built target v4l2_camera
+[39.491s] [ 62%] [32mBuilding CXX object CMakeFiles/v4l2_camera_node.dir/src/v4l2_camera_node.cpp.o[0m
+[39.502s] [ 75%] [32mBuilding CXX object CMakeFiles/v4l2_camera_compose_test.dir/src/v4l2_camera_compose_test.cpp.o[0m
+[50.996s] [ 87%] [32m[1mLinking CXX executable v4l2_camera_node[0m
+[52.009s] [ 87%] Built target v4l2_camera_node
+[61.049s] [100%] [32m[1mLinking CXX executable v4l2_camera_compose_test[0m
+[62.628s] [100%] Built target v4l2_camera_compose_test
+[62.711s] Invoked command in '/home1/ros2_ws/src/sensing/build/v4l2_camera' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home1/autoware/install/autoware_carla_interface:/home1/autoware/install/ros2agnocast:/home1/autoware/install/autoware_adapi_visualizers:/opt/ros/humble /usr/bin/cmake --build /home1/ros2_ws/src/sensing/build/v4l2_camera -- -j12 -l12
+[62.802s] Invoking command in '/home1/ros2_ws/src/sensing/build/v4l2_camera': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home1/autoware/install/autoware_carla_interface:/home1/autoware/install/ros2agnocast:/home1/autoware/install/autoware_adapi_visualizers:/opt/ros/humble /usr/bin/cmake --install /home1/ros2_ws/src/sensing/build/v4l2_camera
+[62.877s] -- Install configuration: ""
+[62.877s] -- Execute custom install script
+[62.878s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/control.hpp
+[62.953s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/fourcc.hpp
+[63.038s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/image_format.hpp
+[63.112s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/pixel_format.hpp
+[63.186s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/rate_bound_status.hpp
+[63.261s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/undistort_kernel.h
+[63.335s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/utility.hpp
+[63.414s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/v4l2_camera.hpp
+[63.495s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/v4l2_camera_device.hpp
+[63.570s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/visibility_control.h
+[63.648s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/launch/intrinsic_camera_calibrator.launch.xml
+[63.722s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/launch/v4l2_camera.launch.py
+[63.812s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/launch/v4l2_camera.launch.xml
+[63.886s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera0.param.yaml
+[63.972s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera1.param.yaml
+[64.064s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera2.param.yaml
+[64.139s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera3.param.yaml
+[64.212s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera4.param.yaml
+[64.294s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera5.param.yaml
+[64.366s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera6.param.yaml
+[64.454s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera_back_calibration.yaml
+[64.527s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera_front120_calibration.yaml
+[64.601s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera_front120_calibration.yaml.back
+[64.677s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera_front30_calibration.yaml
+[64.752s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera_lb_calibration.yaml
+[64.827s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera_lf_calibration.yaml
+[64.901s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera_rb_calibration.yaml
+[64.976s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/camera_rf_calibration.yaml
+[65.052s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/config/intrinsics_camera_calibrator.yaml
+[65.129s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/environment/library_path.sh
+[65.204s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/environment/library_path.dsv
+[65.280s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/control.hpp
+[65.280s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/fourcc.hpp
+[65.280s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/image_format.hpp
+[65.281s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/pixel_format.hpp
+[65.281s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/rate_bound_status.hpp
+[65.282s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/undistort_kernel.h
+[65.283s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/utility.hpp
+[65.283s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/v4l2_camera.hpp
+[65.283s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/v4l2_camera_device.hpp
+[65.283s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/include/v4l2_camera/visibility_control.h
+[65.285s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/launch/intrinsic_camera_calibrator.launch.xml
+[65.285s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/launch/v4l2_camera.launch.py
+[65.286s] -- Up-to-date symlink: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/launch/v4l2_camera.launch.xml
+[65.287s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/ament_index/resource_index/package_run_dependencies/v4l2_camera
+[65.364s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/ament_index/resource_index/parent_prefix_path/v4l2_camera
+[65.455s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/environment/ament_prefix_path.sh
+[65.540s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/environment/ament_prefix_path.dsv
+[65.621s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/environment/path.sh
+[65.696s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/environment/path.dsv
+[65.773s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/local_setup.bash
+[65.860s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/local_setup.sh
+[65.953s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/local_setup.zsh
+[66.032s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/local_setup.dsv
+[66.105s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/package.dsv
+[66.190s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/ament_index/resource_index/packages/v4l2_camera
+[66.273s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/ament_index/resource_index/rclcpp_components/v4l2_camera
+[66.362s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/cmake/ament_cmake_export_include_directories-extras.cmake
+[66.441s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/cmake/ament_cmake_export_targets-extras.cmake
+[66.521s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/cmake/ament_cmake_export_libraries-extras.cmake
+[66.601s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/cmake/ament_cmake_export_dependencies-extras.cmake
+[66.674s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/cmake/v4l2_cameraConfig.cmake
+[66.754s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/cmake/v4l2_cameraConfig-version.cmake
+[66.832s] -- Symlinking: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/package.xml
+[66.950s] -- Installing: /home1/ros2_ws/src/sensing/install/v4l2_camera/lib/libv4l2_camera.so
+[66.963s] -- Set runtime path of "/home1/ros2_ws/src/sensing/install/v4l2_camera/lib/libv4l2_camera.so" to ""
+[66.963s] -- Installing: /home1/ros2_ws/src/sensing/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_node
+[66.967s] -- Set runtime path of "/home1/ros2_ws/src/sensing/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_node" to ""
+[66.967s] -- Installing: /home1/ros2_ws/src/sensing/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_compose_test
+[66.980s] -- Set runtime path of "/home1/ros2_ws/src/sensing/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_compose_test" to ""
+[66.980s] -- Installing: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/cmake/export_v4l2_cameraExport.cmake
+[66.980s] -- Installing: /home1/ros2_ws/src/sensing/install/v4l2_camera/share/v4l2_camera/cmake/export_v4l2_cameraExport-noconfig.cmake
+[66.986s] Invoked command in '/home1/ros2_ws/src/sensing/build/v4l2_camera' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home1/autoware/install/autoware_carla_interface:/home1/autoware/install/ros2agnocast:/home1/autoware/install/autoware_adapi_visualizers:/opt/ros/humble /usr/bin/cmake --install /home1/ros2_ws/src/sensing/build/v4l2_camera
