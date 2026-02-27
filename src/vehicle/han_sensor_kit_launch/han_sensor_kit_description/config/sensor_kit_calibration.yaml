@@ -1,0 +1,78 @@
+sensor_kit_base_link:
+  camera_front_120/camera_link: #front wide 
+    x: 0.28130
+    y: 0.34732
+    z: -0.2550
+    roll: 0.032
+    pitch: -0.193
+    yaw: -0.067
+  camera_lf/camera_link: #left front
+    x: 1.16161
+    y: 1.23325
+    z: -0.8331
+    roll: -0.124
+    pitch: -0.110
+    yaw:  1.120
+  camera_lb/camera_link: #left back
+    x: 1.009
+    y: 1.260
+    z: -0.786
+    roll: -0.109
+    pitch: -0.081
+    yaw: 2.054
+  camera_rf/camera_link: #right front
+    x: 1.029
+    y: -0.760
+    z: -0.809
+    roll: 0.091
+    pitch: -0.054
+    yaw: -1.107
+  camera_rb/camera_link: #right back
+    x: 0.849
+    y: -0.637
+    z: -0.817
+    roll: 0.022
+    pitch: 0.017
+    yaw: -2.11
+  camera_back/camera_link: #back
+    x: -1.119
+    y: 0.308
+    z: -0.514
+    roll: -0.016
+    pitch: 0.028
+    yaw: 3.061
+  camera_front_30/camera_link: #front tele
+    x: 0.123
+    y: 0.324
+    z: -0.229
+    roll: 0.006
+    pitch: -0.115
+    yaw: -0.065
+  rslidar_top_base_link:
+    x: 0.0
+    y: 0.0
+    z: -0.06
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  rslidar_left_base_link:
+    x: 0.0
+    y: 0.30
+    z: -0.30
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  gnss_link:
+    x: -0.1
+    y: 0.0
+    z: -0.2
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  tamagawa/imu_link:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    roll: 3.14159265359
+    pitch: 0.0
+    yaw: 3.14159265359
