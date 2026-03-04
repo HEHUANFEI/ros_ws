@@ -256,11 +256,14 @@ void VoxelGridBasedEuclideanClusterNode::onPointCloud(
   if (use_crop_filter_) {
     sensor_msgs::msg::PointCloud2::SharedPtr filtered_input_msg =
         std::make_shared<sensor_msgs::msg::PointCloud2>();
+    //若启用裁剪（use_crop_filter_），先对输入执行 crop_box_filter
     crop_box_filter(input_msg, filtered_input_msg);
+    //调用 cluster_ 对（裁剪后或原始）点云执行体素+欧式聚类，生成 DetectedObjects
     cluster_->cluster(filtered_input_msg, output);
   } else {
     cluster_->cluster(input_msg, output);
   }
+  // 发布聚类结果到 cluster_pub_
   cluster_pub_->publish(output);
 
   // // build debug msg
