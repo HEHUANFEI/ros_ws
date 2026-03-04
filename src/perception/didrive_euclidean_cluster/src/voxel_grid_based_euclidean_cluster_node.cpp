@@ -19,6 +19,18 @@
 #include "didrive/euclidean_cluster/utils.hpp"
 
 namespace didrive::euclidean_cluster {
+/**
+ * @brief 构造函数 — 初始化节点、声明参数并创建订阅/发布者
+ *
+ * - 声明并读取 ROS 参数（聚类参数、体素/裁剪框配置等）
+ * - 创建点云订阅者与聚类结果、调试及裁剪框可视化发布者
+ * - 初始化性能计时/调试发布器
+ *
+ * @param options rclcpp 节点选项（传递给基类 Node）
+ *
+ * @note 参数通过 declare_parameter 读取，后续可通过动态参数或 launch 覆盖。
+ * @note 构造函数不做耗时的点云处理，仅完成对象与资源的创建。
+ */
 VoxelGridBasedEuclideanClusterNode::VoxelGridBasedEuclideanClusterNode(
     const rclcpp::NodeOptions& options)
     : Node("voxel_grid_based_euclidean_cluster_node", options) {
@@ -72,6 +84,17 @@ VoxelGridBasedEuclideanClusterNode::VoxelGridBasedEuclideanClusterNode(
   stop_watch_ptr_->tic("processing_time");
 }
 
+/**
+ * @brief 发布表示裁剪框边界的 PolygonStamped（用于可视化）
+ *
+ * 将 crop_params_ 定义的轴对齐长方体的顶点/边线按顺序构造为一个 PolygonStamped，
+ * 并通过 crop_box_polygon_pub_ 发布。该多边形用于在可视化工具（如 RViz）中查看
+ * 当前裁剪框位置与尺寸。
+ *
+ * @param header 用于填充返回消息的 header（时间戳、frame_id 等）
+ *
+ * @note 生成的 polygon 是一组点构成的立方体框线（非面填充），便于观察边界。
+ */
 void VoxelGridBasedEuclideanClusterNode::publishCropBoxPolygon(
     const std_msgs::msg::Header& header) {
   auto generatePoint = [](double x, double y, double z) {
@@ -122,6 +145,20 @@ void VoxelGridBasedEuclideanClusterNode::publishCropBoxPolygon(
   crop_box_polygon_pub_->publish(polygon_msg);
 }
 
+/**
+ * @brief 基于轴对齐裁剪框对输入 PointCloud2 进行过滤（in-place 输出）
+ *
+ * - 直接在 PointCloud2 二进制缓冲区上按 point_step 步长遍历每个点，
+ *   通过字段偏移读取 x/y/z（避免额外的对象构造），判断是否落在裁剪框内。
+ * - 支持 negative 模式（反向保留框外点）
+ * - 忽略包含 NaN/无穷的点并计数，最终修正输出 PointCloud2 的元数据（width/height/row_step 等）
+ *
+ * @param input 输入点云（ConstSharedPtr），应包含有效的 fields（x,y,z）
+ * @param[out] output 过滤后点云（SharedPtr），函数会写入 data 与元信息
+ *
+ * @warning 输入与输出使用相同的点字段布局；若字段缺失或布局异常会导致未定义行为。
+ * @performance 预先按输入大小分配输出缓冲以减少循环中 realloc，提高性能。
+ */
 void VoxelGridBasedEuclideanClusterNode::crop_box_filter(
     const sensor_msgs::msg::PointCloud2::ConstSharedPtr& input,
     sensor_msgs::msg::PointCloud2::SharedPtr& output) {
@@ -187,6 +224,22 @@ void VoxelGridBasedEuclideanClusterNode::crop_box_filter(
   publishCropBoxPolygon(output->header);
 }
 
+/**
+ * @brief 点云回调：接收点云、可选裁剪、执行聚类并发布结果与调试信息
+ *
+ * 处理流程：
+ *  1. 记录并重置处理计时器
+ *  2. 若输入为空则打印限速警告并返回（避免下游库报错）
+ *  3. 若启用裁剪（use_crop_filter_），先对输入执行 crop_box_filter
+ *  4. 调用 cluster_ 对（裁剪后或原始）点云执行体素+欧式聚类，生成 DetectedObjects
+ *  5. 发布聚类结果到 cluster_pub_
+ *  6. 使用 debug_publisher_ 发布处理时间、周期时间与管线延迟等调试度量
+ *
+ * @param input_msg 接收到的原始 PointCloud2 消息（ConstSharedPtr）
+ *
+ * @note 聚类实际逻辑封装在 VoxelGridBasedEuclideanCluster::cluster 中。
+ * @note 发布的 output.header.timestamp 用于计算管线延迟（pipeline latency）。
+ */
 void VoxelGridBasedEuclideanClusterNode::onPointCloud(
     const sensor_msgs::msg::PointCloud2::ConstSharedPtr input_msg) {
   stop_watch_ptr_->toc("processing_time", true);
