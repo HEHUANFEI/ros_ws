@@ -39,7 +39,7 @@ VoxelGridBasedEuclideanCluster::VoxelGridBasedEuclideanCluster(
       voxel_leaf_size_(voxel_leaf_size),
       min_points_number_per_voxel_(min_points_number_per_voxel) {}
 // TODO(badai-nguyen): remove this function when field copying also implemented
-// for euclidean_cluster.cpp
+// for euclidean_cluster.cpp 当 euclidean_cluster.cpp 中也实现了字段复制功能时，请移除此函数
 bool VoxelGridBasedEuclideanCluster::cluster(
     const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& pointcloud,
     std::vector<pcl::PointCloud<pcl::PointXYZ>>& clusters) {
@@ -121,6 +121,7 @@ bool VoxelGridBasedEuclideanCluster::estimate_shape(
   return true;
 }
 
+//该函数接收ROS2点云消息类型的输入，输出是AutoWare格式的检测对象。
 bool VoxelGridBasedEuclideanCluster::cluster(
     const sensor_msgs::msg::PointCloud2::ConstSharedPtr& pointcloud_msg,
     autoware_perception_msgs::msg::DetectedObjects& objects) {
@@ -226,6 +227,7 @@ bool VoxelGridBasedEuclideanCluster::cluster(
   return true;
 }
 
+//该函数接收ROS2点云消息类型的输入，输出是Tier4格式的带特征的检测对象。
 bool VoxelGridBasedEuclideanCluster::cluster(
     const sensor_msgs::msg::PointCloud2::ConstSharedPtr& pointcloud_msg,
     tier4_perception_msgs::msg::DetectedObjectsWithFeature& objects) {
