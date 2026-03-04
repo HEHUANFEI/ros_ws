@@ -1,18 +1,18 @@
 /**:
   ros__parameters:
-    tolerance: 0.5
-    voxel_leaf_size: 0.2
-    min_points_number_per_voxel: 1
-    min_cluster_size: 3
-    max_cluster_size: 50000
-    use_height: true
+    tolerance: 0.5   # 聚类距离阈值,若两个点间距离小于该值，则可被认为属于同一簇。值越大，簇越容易合并。
+    voxel_leaf_size: 0.2  # 下采样的体素边长（每个体素的边长）,值越大，下采样越粗，细节丢失越多。
+    min_points_number_per_voxel: 1  # 判定一个体素为“有效体素”所需的最少点数。
+    min_cluster_size: 3 # 接受的最小簇的点数阈值（或在下采样后以点/体素计数）。小于该数目的簇会被丢弃（认为是噪声）。
+    max_cluster_size: 50000  # 接受的最大簇的点数阈值。超过该数目的簇会被丢弃或视为异常（可防止把整片点云当成一个簇）。
+    use_height: true # 是否在聚类时考虑高度（Z 轴）。true 表示做 3D 聚类（考虑 Z）
     input_frame: "base_link"
     # low height crop box filter param
-    use_crop_filter: true
+    use_crop_filter: true  # 是否启用轴对齐裁剪框（CropBox）过滤。true 表示先用 min/max x,y,z 边界裁剪点云，再做下游处理；false 则跳过该过滤步骤。
     max_x: 50.0
     min_x: -50.0
     max_y: 6.0
     min_y: -6.0
     max_z: 5.0
     min_z: 0.2
-    negative: false
+    negative: false  # 裁剪框的反向标志,false：保留裁剪框内的点
